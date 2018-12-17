@@ -11,7 +11,7 @@ function largotiempo(){
 router.get('/heroes',(req:Request, res:Response)=>{
     console.log('funcion normal');
     largotiempo();
-    console.log('finfuncion normal2');
+    console.log('finfuncion normal');
     res.json({
         ok:true
     })

@@ -2,7 +2,7 @@
 
 ## GENERAL ##
 OWNER 			= getmin
-SERVICE_NAME 	= demonode
+SERVICE_NAME 	= api-node
 
 ## DEPLOY ##
 ENV 			?= dev
@@ -26,6 +26,9 @@ stop: ## stop docker containers: make stop
 
 ssh: ## Connect to container for ssh protocol : make ssh
 	docker exec -it $(CONTAINER_NAME) sh
+
+stats: ## Connect to container for ssh protocol : make ssh
+	docker stats $(CONTAINER_NAME)
 
 log: ## Show container logs make : make log
 	#docker-compose -f container/docker-compose.yml logs -f backend

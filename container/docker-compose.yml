@@ -6,6 +6,7 @@ services:
     container_name: $CONTAINER_NAME
     ports: 
       - 8086:8080
+    mem_limit: 300m
     volumes: 
       - ./../application/src:/application/src
 
