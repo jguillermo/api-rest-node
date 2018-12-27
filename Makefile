@@ -18,6 +18,13 @@ export IMAGE_DEV		 = $(PROJECT_NAME):dev
 build: ## build image to dev: make build
 	docker build -f container/dev/Dockerfile -t $(IMAGE_DEV) application
 
+install: ## build image to dev: make install
+	make build
+	make console a="yarn install"
+
+console: ## ejecuta la consola de la imagen node: make a="param"
+	docker run --rm -t -v ${PWD}/application:/application $(IMAGE_DEV) ${a}
+
 start: ## up docker containers: make up
 	docker-compose -f container/docker-compose.yml up -d
 
