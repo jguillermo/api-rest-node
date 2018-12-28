@@ -1,7 +1,23 @@
-import { User } from "../../BundleContext/Users/Domain/User";
+import { User, UserRepository } from "../../BundleContext/Users/Domain/User";
+import { UserServiceApp } from "../../BundleContext/Users/Application/Service/UserServiceApp";
 
-test('validando 1', async() => {
-    let user:User=User.create('123','jose');
-    expect('123').toEqual(user.id);
-    expect('jose').toEqual(user.name);
+
+
+
+test('validando servicio agregar', async () => {
+
+    const Mock = jest.fn<UserRepository>(() => ({
+        persist(user: User) {
+            console.log('saludossssssss');
+            return true;
+        },
+        findById(id: string) {
+            return User.create('123', 'jose');
+        }
+    }));
+    const mock = new Mock();
+
+    let userService = new UserServiceApp(mock)
+    let rpta = userService.create('123', 'jose');
+    expect(true).toEqual(rpta);
 });
