@@ -12,7 +12,7 @@ export class User {
         return this._id;
     }
 
-    get name(){
+    get name() {
         return this._name;
     }
 
