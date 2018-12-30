@@ -1,34 +1,18 @@
 import {User, UserRepository} from "../../BundleContext/Users/Domain/User";
 import {UserServiceApp} from "../../BundleContext/Users/Application/Service/UserServiceApp";
 
-const userRepositoryMock = jest.fn<UserRepository>(() => ({
-    persist(user: User) {
-        return true;
-    },
-    findById(id: string) {
-        return User.create('123', 'jose');
-    }
-}));
-
-const userRepositoryMockError = jest.fn<UserRepository>(() => ({
-    persist(user: User) {
-        return false;
-    },
-    findById(id: string) {
-        return null;
-    }
-}));
+import {userRepositoryMockError, userRepositoryMock} from "../mockRepository";
 
 describe('user: servicio de application ok', () => {
 
-    test('agregar nuevo usuario', async () => {
+    test('agregar nuevo usuario', () => {
         const userRepository = new userRepositoryMock();
         let userService = new UserServiceApp(userRepository);
         let rpta = userService.create('123', 'jose');
         expect(true).toEqual(rpta);
     });
 
-    test('agregar nuevo usuario', async () => {
+    test('agregar nuevo usuario', () => {
         const userRepository = new userRepositoryMock();
         let userService = new UserServiceApp(userRepository);
 
@@ -39,7 +23,7 @@ describe('user: servicio de application ok', () => {
 });
 
 describe('user: servicio de application error', () => {
-    test('agregar nuevo usuario', async () => {
+    test('agregar nuevo usuario', () => {
         const userRepository = new userRepositoryMockError();
         let userService = new UserServiceApp(userRepository);
         expect(() => {
