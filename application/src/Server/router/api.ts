@@ -2,8 +2,8 @@ import { userGetCollectionAction } from "../controller/UsersCollection";
 
 import { Router } from "express";
 
-const router = Router();
+const ROUTER = Router();
 
-router.get("/users", userGetCollectionAction);
+ROUTER.get("/users", userGetCollectionAction);
 
-export default router;
+export default ROUTER;

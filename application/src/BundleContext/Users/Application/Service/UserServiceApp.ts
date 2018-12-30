@@ -1,18 +1,18 @@
 import {IuserRepository, User} from "../../Domain/User";
 
 export class UserServiceApp {
-    constructor(private userRepository: IuserRepository) {
-        this.userRepository = userRepository;
+    constructor(private _userRepository: IuserRepository) {
+        this._userRepository = _userRepository;
     }
 
     public create(id: string, name: string): boolean {
         let user: User = User.create(id, name);
-        this.userRepository.persist(user);
+        this._userRepository.persist(user);
         return true;
     }
 
     public findById(id: string) {
-        let user: User = this.userRepository.findById(id);
+        let user: User = this._userRepository.findById(id);
 
         if (user == null) {
             throw new Error(`no se encontro el id ${id}`);

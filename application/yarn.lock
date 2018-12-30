@@ -4314,6 +4314,11 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
+vrsource-tslint-rules@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/vrsource-tslint-rules/-/vrsource-tslint-rules-6.0.0.tgz#a4e25e8f3fdd487684174f423c090c35d60f37a9"
+  integrity sha512-pmcnJdIVziZTk1V0Cqehmh3gIabBRkBYXkv9vx+1CZDNEa41kNGUBFwQLzw21erYOd2QnD8jJeZhBGqnlT1HWw==
+
 w3c-hr-time@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.1.tgz#82ac2bff63d950ea9e3189a58a65625fedf19045"

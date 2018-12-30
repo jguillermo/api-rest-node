@@ -1,5 +1,6 @@
 import Server from "./Server/server";
-const server = Server.init(8080);
-server.start(() => {
+
+const SERVER = Server.init(8080);
+SERVER.start(() => {
     console.log("server iniciado");
 });

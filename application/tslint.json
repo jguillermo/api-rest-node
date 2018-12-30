@@ -6,7 +6,24 @@
     "jsRules": {},
     "rules": {
         "no-console": false,
-        "prefer-const": false
+        "prefer-const": false,
+        "variable-name": false,
+        "ext-variable-name": [
+            true,
+            ["class",                 "pascal"],
+            ["interface",             "pascal", {"regex": "^I.*$"}],
+            ["parameter",             "camel"],
+            ["property", "static",    "camel", {"regex": "^s.*$"}],
+            ["property", "private",   "camel", "require-leading-underscore"],
+            ["property", "protected", "camel", "allow-leading-underscore"],
+            ["variable", "local",     "snake"],
+            ["variable", "const",     "upper"],
+            ["variable",              "camel", {"regex": "^g.*$"}],
+            ["method", "private",     "camel", "require-leading-underscore"],
+            ["method", "protected",   "camel", "allow-leading-underscore"],
+            ["function",              "camel"],
+            ["default",               "camel"]
+        ]
     },
-    "rulesDirectory": []
+    "rulesDirectory": ["vrsource-tslint-rules/rules"]
 }

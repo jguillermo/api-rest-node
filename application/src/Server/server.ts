@@ -13,14 +13,14 @@ export default class Server {
     constructor(port: number) {
         this.port = port;
         this.app = express();
-        this.addRouter();
+        this._addRouter();
     }
 
     public start(callback: () => void) {
         this.app.listen(this.port, callback);
     }
 
-    private addRouter() {
+    private _addRouter() {
         this.app.use(router);
     }
 }

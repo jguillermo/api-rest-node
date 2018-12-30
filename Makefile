@@ -27,7 +27,7 @@ dist: ## build image to dev: make install
 	make console a="/application/node_modules/.bin/tsc"
 
 console: ## ejecuta la consola de la imagen node: make a="param"
-	docker run --rm -t -v ${PWD}/application:/application $(IMAGE_DEV) ${a}
+	@docker run --rm -t -v ${PWD}/application:/application $(IMAGE_DEV) ${a}
 
 start: ## up docker containers: make up
 	docker-compose -f container/docker-compose.yml up -d
@@ -51,7 +51,7 @@ test: ## test unit make : make test
 	make console a="npm test"
 
 lint: ## test unit make : make test
-	make console a="/application/node_modules/.bin/tslint -c tslint.json --fix 'src/**/*.ts*'"
+	make console a="/application/node_modules/.bin/tslint -c tslint.json --force --fix 'src/**/*.ts*'"
 
 ## Tools docker##
 docker-kill: ## Execute migrate : make migrate

@@ -1,21 +1,21 @@
 import {UserServiceApp} from "../../BundleContext/Users/Application/Service/UserServiceApp";
 import {IuserRepository, User} from "../../BundleContext/Users/Domain/User";
 
-import {userRepositoryMock, userRepositoryMockError} from "../mockRepository";
+import {gUserRepositoryMock, gUserRepositoryMockError} from "../mockRepository";
 
 describe("user: servicio de application ok", () => {
 
     test("agregar nuevo usuario", () => {
-        let userRepository = new userRepositoryMock();
-        let userService = new UserServiceApp(userRepository);
-        let rpta = userService.create("123", "jose");
+        let user_repository = new gUserRepositoryMock();
+        let user_service = new UserServiceApp(user_repository);
+        let rpta = user_service.create("123", "jose");
         expect(true).toEqual(rpta);
     });
 
     test("agregar nuevo usuario", () => {
-        let userRepository = new userRepositoryMock();
-        let userService = new UserServiceApp(userRepository);
-        let user = userService.findById("123");
+        let user_repository = new gUserRepositoryMock();
+        let user_service = new UserServiceApp(user_repository);
+        let user = user_service.findById("123");
         expect("123").toEqual(user.id);
     });
 
@@ -23,10 +23,10 @@ describe("user: servicio de application ok", () => {
 
 describe("user: servicio de application error", () => {
     test("agregar nuevo usuario", () => {
-        let userRepository = new userRepositoryMockError();
-        let userService = new UserServiceApp(userRepository);
+        let user_repository = new gUserRepositoryMockError();
+        let user_service = new UserServiceApp(user_repository);
         expect(() => {
-            userService.findById("123");
+            user_service.findById("123");
         }).toThrowError("no se encontro el id 123");
     });
 });
