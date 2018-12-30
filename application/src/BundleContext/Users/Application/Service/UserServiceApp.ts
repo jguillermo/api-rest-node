@@ -1,8 +1,11 @@
 import {IuserRepository, User} from "../../Domain/User";
 
 export class UserServiceApp {
-    constructor(private _userRepository: IuserRepository) {
-        this._userRepository = _userRepository;
+
+    private _userRepository: IuserRepository;
+
+    constructor(userRepository: IuserRepository) {
+        this._userRepository = userRepository;
     }
 
     public create(id: string, name: string): boolean {
