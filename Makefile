@@ -45,10 +45,13 @@ log: ## Show container logs make : make log
 	#docker-compose -f container/docker-compose.yml logs -f backend
 	docker logs -f $(CONTAINER_NAME)
 
-## testing
+## testing - lint
 
 test: ## test unit make : make test
 	make console a="npm test"
+
+lint: ## test unit make : make test
+	make console a="/application/node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'"
 
 ## Tools docker##
 docker-kill: ## Execute migrate : make migrate
