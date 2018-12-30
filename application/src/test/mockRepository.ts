@@ -1,6 +1,6 @@
-import {User, UserRepository} from "../BundleContext/Users/Domain/User";
+import {IuserRepository, User} from "../BundleContext/Users/Domain/User";
 
-export const userRepositoryMock = jest.fn<UserRepository>(() => ({
+export const userRepositoryMock = jest.fn<IuserRepository>(() => ({
     persist(user: User) {
         return true;
     },
@@ -9,7 +9,7 @@ export const userRepositoryMock = jest.fn<UserRepository>(() => ({
     },
 }));
 
-export const userRepositoryMockError = jest.fn<UserRepository>(() => ({
+export const userRepositoryMockError = jest.fn<IuserRepository>(() => ({
     persist(user: User) {
         return false;
     },

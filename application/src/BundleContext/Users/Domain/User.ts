@@ -1,30 +1,24 @@
 export class User {
 
     get id() {
-        return this._id;
+        return this.$id;
     }
 
     get name() {
-        return this._name;
+        return this.$name;
     }
 
     public static create(id: string, name: string): User {
-        const user = new User(id, name);
-
-        return user;
+        return new User(id, name);
     }
 
-    private _id: string;
-    private _name: string;
-
-    constructor(id: string, name: string) {
-        this._id = id;
-        this._name = name;
+    constructor(private $id: string, private $name: string) {
+        this.$id = $id;
+        this.$name = $name;
     }
 }
 
-export interface UserRepository {
+export interface IuserRepository {
     persist(user: User): boolean;
-
     findById(id: string): User;
 }
