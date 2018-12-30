@@ -1,13 +1,5 @@
 export class User {
 
-    private _id: string;
-    private _name: string;
-
-    constructor(id: string, name: string) {
-        this._id = id;
-        this._name = name;
-    }
-
     get id() {
         return this._id;
     }
@@ -16,10 +8,18 @@ export class User {
         return this._name;
     }
 
-    static create(id: string, name: string): User {
-        let user = new User(id, name);
+    public static create(id: string, name: string): User {
+        const user = new User(id, name);
 
-        return user
+        return user;
+    }
+
+    private _id: string;
+    private _name: string;
+
+    constructor(id: string, name: string) {
+        this._id = id;
+        this._name = name;
     }
 }
 
@@ -28,4 +28,3 @@ export interface UserRepository {
 
     findById(id: string): User;
 }
-

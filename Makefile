@@ -51,7 +51,7 @@ test: ## test unit make : make test
 	make console a="npm test"
 
 lint: ## test unit make : make test
-	make console a="/application/node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'"
+	make console a="/application/node_modules/.bin/tslint -c tslint.json --fix 'src/**/*.ts*'"
 
 ## Tools docker##
 docker-kill: ## Execute migrate : make migrate
