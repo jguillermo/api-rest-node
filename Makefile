@@ -22,6 +22,10 @@ install: ## build image to dev: make install
 	make build
 	make console a="yarn install"
 
+dist: ## build image to dev: make install
+	make console a="rm -rf dist"
+	make console a="/application/node_modules/.bin/tsc"
+
 console: ## ejecuta la consola de la imagen node: make a="param"
 	docker run --rm -t -v ${PWD}/application:/application $(IMAGE_DEV) ${a}
 
@@ -40,6 +44,11 @@ stats: ## Connect to container for ssh protocol : make ssh
 log: ## Show container logs make : make log
 	#docker-compose -f container/docker-compose.yml logs -f backend
 	docker logs -f $(CONTAINER_NAME)
+
+## testing
+
+test: ## test unit make : make test
+	make console a="npm test"
 
 ## Tools docker##
 docker-kill: ## Execute migrate : make migrate

@@ -25,6 +25,7 @@ export class User {
 
 export interface UserRepository {
     persist(user: User): boolean;
+
     findById(id: string): User;
 }
 
