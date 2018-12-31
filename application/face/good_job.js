@@ -15,10 +15,11 @@ var image=`
  @@         @ @@@@@@@@@@@@@@@@@@@@@@
   @@@@@@@@@@   @@@@@@@@@@@@@@@@@@@
                  @@@@@@@@@@@@@@@
+                 
+           
+            HEY, GOOD JOB!!!
 `;
 
-var text=`\tHEY, GOOD JOB!!!\t`;
+console.log('\x1b[1m\x1b[33m%s\x1b[0m',image);
 
-console.log('\x1b[33m%s\x1b[0m',image);
-console.log('\x1b[1m\x1b[33m%s\x1b[0m',text);
 
