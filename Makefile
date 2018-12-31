@@ -53,6 +53,10 @@ test: ## test unit make : make test
 lint: ## test unit make : make test
 	make console a="/application/node_modules/.bin/tslint -c tslint.json --force --fix 'src/**/*.ts*'"
 
+git: ## test unit make : make test
+	cp -p ${PWD}/application/face/pre-commit.sh ${PWD}/.git/hooks/pre-commit
+	${PWD}/.git/hooks/pre-commit
+
 ## Tools docker##
 docker-kill: ## Execute migrate : make migrate
 	docker rm -f $$(docker ps -aq)
