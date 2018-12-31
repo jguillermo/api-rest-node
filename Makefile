@@ -21,6 +21,7 @@ build: ## build image to dev: make build
 install: ## build image to dev: make install
 	make build
 	make console a="yarn install"
+	make git-hooks
 
 dist: ## build image to dev: make install
 	make console a="rm -rf dist"
@@ -56,8 +57,8 @@ lint-fix: ## test unit make : make test
 lint: ## inspect code : make lint-inspect
 	@make -s console a="npm run lint"
 
-git: ## test unit make : make test
-	cp -p ${PWD}/application/face/pre-commit.sh ${PWD}/.git/hooks/pre-commit
+git-hooks: ## test unit make : make test
+	cp -p ${PWD}/application/face/git-hook.sh ${PWD}/.git/hooks/pre-commit
 
 ## Tools docker##
 docker-kill: ## Execute migrate : make migrate
