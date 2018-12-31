@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts*'",
+    "lint-fix": "tslint -c tslint.json --fix 'src/**/*.ts*'"
   },
   "author": "",
   "license": "ISC",
