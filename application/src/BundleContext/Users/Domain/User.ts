@@ -1,24 +1,14 @@
+import {toString} from "@sdk/Sanitizers";
+
 export class User {
-
-    get id() {
-        return this._id;
+    public static create(id: any, name: any): User {
+        let user: User = new User();
+        user.id = toString(id);
+        user.name = toString(name);
+        return user;
     }
-
-    get name() {
-        return this._name;
-    }
-
-    public static create(id: string, name: string): User {
-        return new User(id, name);
-    }
-
-    private _id: string;
-    private _name: string;
-
-    constructor(id: string, name: string) {
-        this._id = id;
-        this._name = name;
-    }
+    public id: string;
+    public name: string;
 }
 
 export interface IuserRepository {

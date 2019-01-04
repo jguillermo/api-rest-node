@@ -1,9 +1,14 @@
 const coverageThreshold = 100;
 const collectCoverageFrom = [
     "src/BundleContext/**/*.ts",
+    "src/Sdk/**/*.ts",
     "!**/node_modules/**",
     "!**/vendor/**"
-]
+];
+
+const moduleNameMapper={
+    '^@sdk/(.*)$': '<rootDir>/src/sdk/$1'
+  };
 
 module.exports = {
     "roots": [
@@ -29,5 +34,6 @@ module.exports = {
             statements: coverageThreshold
         }
     },
-    collectCoverageFrom
+    collectCoverageFrom,
+    moduleNameMapper
 }
