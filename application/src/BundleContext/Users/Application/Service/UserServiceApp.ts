@@ -1,3 +1,4 @@
+import { BadRequest } from "@sdk/Exception";
 import {IuserRepository, User} from "../../Domain/User";
 
 export class UserServiceApp {
@@ -18,7 +19,7 @@ export class UserServiceApp {
         let user: User = this._userRepository.findById(id);
 
         if (user == null) {
-            throw new Error(`no se encontro el id ${id}`);
+            throw new BadRequest(`no se encontro el id ${id}`);
         }
 
         return {
