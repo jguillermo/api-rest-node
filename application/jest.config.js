@@ -3,6 +3,7 @@ const collectCoverageFrom = [
     "src/BundleContext/**/*.ts",
     "src/sdk/**/*.ts",
     "!src/BundleContext/Users/Infrastructure/**",
+    "!src/BundleContext/module.ts",
     "!node_modules/**"
 ];
 
