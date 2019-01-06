@@ -12,11 +12,16 @@ PROJECT_NAME	         = $(OWNER)-$(ENV)-$(SERVICE_NAME)
 export CONTAINER_NAME 	 = $(PROJECT_NAME)_backend
 export CONTAINER_DB_NAME = $(PROJECT_NAME)_db
 export IMAGE_DEV		 = $(PROJECT_NAME):dev
+export IMAGE_DIST		 = $(PROJECT_NAME):dist
 
 
 ## Init container Commons ##
 build: ## build image to dev: make build
 	docker build -f container/dev/Dockerfile -t $(IMAGE_DEV) application
+
+## Init container Commons ##
+build-dist: ## build image to dev: make build
+	docker build -f container/dist/Dockerfile -t $(IMAGE_DIST) application
 
 install: ## build image to dev: make install
 	make build
@@ -32,6 +37,9 @@ console: ## ejecuta la consola de la imagen node: make a="param"
 
 start: ## up docker containers: make up
 	docker-compose -f container/docker-compose.yml up -d
+
+start-dist: ## up docker containers: make up
+	docker-compose -f container/docker-compose.dist.yml up
 
 stop: ## stop docker containers: make stop
 	docker-compose -f container/docker-compose.yml stop

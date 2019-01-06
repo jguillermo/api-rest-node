@@ -18,6 +18,6 @@ RUN mkdir /nodecache && chmod 777 -R /nodecache && npm config set cache /nodecac
 # Bundle app source
 #COPY . .
 
-EXPOSE 8080
+EXPOSE 80
 #CMD [ "./node_modules/nodemon/bin/nodemon.js" ]
 #CMD [ "pwd" ]

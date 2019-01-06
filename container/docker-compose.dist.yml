@@ -2,14 +2,11 @@ version: '2'
 services:
 
   backend:
-    image: $IMAGE_DEV
+    image: $IMAGE_DIST
     container_name: $CONTAINER_NAME
     ports: 
-      - 8080:80
+      - 8082:80
     #mem_limit: 300m
-    volumes: 
-      - ./../application:/application
-    command: ["./node_modules/nodemon/bin/nodemon.js"]
 
 #  mysql:
 #    image: mysql:5.7

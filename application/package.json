@@ -29,7 +29,7 @@
     "typescript": "^3.2.2"
   },
   "_moduleAliases": {
-    "@sdk": "./src/sdk",
-    "@app": "./src/BundleContext"
+    "@sdk": "./dist/sdk",
+    "@app": "./dist/BundleContext"
   }
 }
