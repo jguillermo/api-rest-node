@@ -19,5 +19,6 @@ export class User {
 
 export interface IuserRepository {
     persist(user: User): boolean;
+
     findById(id: string): User;
 }

@@ -6,16 +6,16 @@ import {gUserRepositoryMock, gUserRepositoryMockError} from "../mockRepository";
 describe("user: servicio de application ok", () => {
 
     test("agregar nuevo usuario", () => {
-        let user_repository = new gUserRepositoryMock();
-        let user_service = new UserServiceApp(user_repository);
-        let rpta = user_service.create("237b60db-83e6-4502-b1e2-98a15340f065", "jose");
+        let userRepository = new gUserRepositoryMock();
+        let userService = new UserServiceApp(userRepository);
+        let rpta = userService.create("237b60db-83e6-4502-b1e2-98a15340f065", "jose");
         expect(true).toEqual(rpta);
     });
 
     test("buscar un usuario", () => {
-        let user_repository = new gUserRepositoryMock();
-        let user_service = new UserServiceApp(user_repository);
-        let user = user_service.findById("237b60db-83e6-4502-b1e2-98a15340f065");
+        let userRepository = new gUserRepositoryMock();
+        let userService = new UserServiceApp(userRepository);
+        let user = userService.findById("237b60db-83e6-4502-b1e2-98a15340f065");
         expect("237b60db-83e6-4502-b1e2-98a15340f065").toEqual(user.id);
     });
 
@@ -23,13 +23,13 @@ describe("user: servicio de application ok", () => {
 
 describe("user: servicio de application error", () => {
     test("agregar nuevo usuario", () => {
-        let user_repository = new gUserRepositoryMockError();
-        let user_service = new UserServiceApp(user_repository);
+        let userRepository = new gUserRepositoryMockError();
+        let userService = new UserServiceApp(userRepository);
         expect(() => {
-            user_service.findById("237b60db-83e6-4502-b1e2-98a15340f065");
+            userService.findById("237b60db-83e6-4502-b1e2-98a15340f065");
         }).toThrowError("no se encontro el id 237b60db-83e6-4502-b1e2-98a15340f065");
         expect(() => {
-            user_service.findById("237b60db-83e6-4502-b1e2-98a15340f065");
+            userService.findById("237b60db-83e6-4502-b1e2-98a15340f065");
         }).toThrowError(BadRequest);
 
     });

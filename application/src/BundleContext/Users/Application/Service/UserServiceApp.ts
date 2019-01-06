@@ -1,22 +1,22 @@
+import { IuserRepository, User } from "@app/Users/Domain/User";
 import { BadRequest } from "@sdk/Exception";
-import {IuserRepository, User} from "../../Domain/User";
 
 export class UserServiceApp {
 
-    private _userRepository: IuserRepository;
+    private userRepository: IuserRepository;
 
     constructor(userRepository: IuserRepository) {
-        this._userRepository = userRepository;
+        this.userRepository = userRepository;
     }
 
     public create(id: string, name: string): boolean {
         let user: User = User.create(id, name);
-        this._userRepository.persist(user);
+        this.userRepository.persist(user);
         return true;
     }
 
     public findById(id: string) {
-        let user: User = this._userRepository.findById(id);
+        let user: User = this.userRepository.findById(id);
 
         if (user == null) {
             throw new BadRequest(`no se encontro el id ${id}`);

@@ -1,13 +1,14 @@
 const coverageThreshold = 100;
 const collectCoverageFrom = [
     "src/BundleContext/**/*.ts",
-    "src/Sdk/**/*.ts",
-    "!**/node_modules/**",
-    "!**/vendor/**"
+    "src/sdk/**/*.ts",
+    "!src/BundleContext/Users/Infrastructure/**",
+    "!node_modules/**"
 ];
 
 const moduleNameMapper={
-    '^@sdk/(.*)$': '<rootDir>/src/sdk/$1'
+    '^@sdk/(.*)$': '<rootDir>/src/sdk/$1',
+    '^@app/(.*)$': '<rootDir>/src/BundleContext/$1'
   };
 
 module.exports = {
