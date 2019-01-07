@@ -8,10 +8,10 @@ ENV NODE_ENV production
 RUN yarn install
 
 
-FROM node:10.15.0-alpine
+FROM node:10.15.0-jessie-slim
 WORKDIR /application
 EXPOSE 80
 COPY --from=build /application/node_modules /application/node_modules
 COPY --from=build /application/dist /application/src
 COPY --from=build /application/package.json /application/package.json
-ENTRYPOINT ["node", "dist/index"]
+CMD node --expose-gc src/index

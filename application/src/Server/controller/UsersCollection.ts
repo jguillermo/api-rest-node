@@ -11,3 +11,15 @@ export async function userGetCollectionAction(request: Request, response: Respon
         service.findById("040a1a2c-2e00-437d-a6e6-f05b0704dfad"),
     ]);
 }
+
+export async function systemcleanAction(request: Request, response: Response) {
+
+    if (global.gc) {
+        global.gc();
+    } else {
+        console.log("Garbage collection unavailable.  Pass --expose-gc "
+          + "when launching node to enable forced garbage collection.");
+    }
+
+    response.send([]);
+}

@@ -62,6 +62,10 @@ log: ## Show container logs make : make log
 tests-e2e: ## Run the end to end Tests : make tests-e2e
 	docker-compose -f container/docker-compose.test.yml run --rm test
 
+## testing - lint
+tests-e2e-dist: ## Run the end to end Tests : make tests-e2e
+	docker-compose -f container/docker-compose.dist.test.yml run --rm test
+
 test-unit: ## test unit make : make test
 	make console a="npm run test"
 

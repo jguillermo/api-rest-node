@@ -1,0 +1,13 @@
+version: '2'
+services:
+  backend:
+    extends:
+      file: docker-compose.dist.yml
+      service: backend
+  test:
+    image: $IMAGE_TEST
+    volumes:
+      - ./../test/e2e:/app/e2e
+    depends_on:
+       - backend
+    command: "/tmp/wait-for-it.sh backend:80 -t 50 -- /app/runtest.sh"
