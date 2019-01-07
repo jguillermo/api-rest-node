@@ -1,0 +1,22 @@
+{
+  "name": "application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "build": "tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts*'",
+    "lint-fix": "tslint -c tslint.json --fix 'src/**/*.ts*'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "module-alias": "^2.1.0",
+    "validator": "^10.10.0"
+  },
+  "_moduleAliases": {
+    "@sdk": "./src/sdk",
+    "@app": "./src/BundleContext"
+  }
+}
