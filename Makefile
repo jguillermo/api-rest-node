@@ -13,6 +13,7 @@ export CONTAINER_NAME 	 = $(PROJECT_NAME)_backend
 export CONTAINER_DB_NAME = $(PROJECT_NAME)_db
 export IMAGE_DEV		 = $(PROJECT_NAME):dev
 export IMAGE_DIST		 = $(PROJECT_NAME):dist
+export IMAGE_TEST		 = $(PROJECT_NAME):test
 
 
 ## Init container Commons ##
@@ -22,6 +23,9 @@ build: ## build image to dev: make build
 ## Init container Commons ##
 build-dist: ## build image to dev: make build
 	docker build -f container/dist/Dockerfile -t $(IMAGE_DIST) application
+
+build-test: ## build image node
+	docker build -f container/test-e2e/Dockerfile -t $(IMAGE_TEST) container/test-e2e
 
 install: ## build image to dev: make install
 	make build
@@ -55,9 +59,11 @@ log: ## Show container logs make : make log
 	docker logs -f $(CONTAINER_NAME)
 
 ## testing - lint
+tests-e2e: ## Run the end to end Tests : make tests-e2e
+	docker-compose -f container/docker-compose.test.yml run --rm test
 
-test: ## test unit make : make test
-	@make console a="npm run test"
+test-unit: ## test unit make : make test
+	make console a="npm run test"
 
 lint-fix: ## test unit make : make test
 	make -s console a="npm run lint-fix"

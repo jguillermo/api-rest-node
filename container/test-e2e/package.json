@@ -14,7 +14,8 @@
       "moduleNameMapper": {
           "^@request": "<rootDir>/request",
           "^@mysql": "<rootDir>/request/mysql"
-      }
+      },
+      "testEnvironment": "node"
   },
   "scripts": {
       "test": "jest --runInBand --verbose",

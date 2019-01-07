@@ -25,7 +25,7 @@ if [ $? != 0 ] ; then
    ERROR_LINT="Lint error"
 fi
 
-make test
+make test-unit
 if [ $? != 0 ] ; then
    MAKE_ERROR=1
    ERROR_TEST="Test error"
