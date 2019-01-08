@@ -1,6 +1,6 @@
 import { UserServiceApp } from "@app/Users/Application/Service/UserServiceApp";
 import { UserHDRepository } from "@app/Users/Infrastructure/Repository/HardData/UserRepository";
-import { LoggerWinston } from "@sdk/logger";
+import { LoggerWinston } from "@sdk/Logger";
 
 function userRepository() {
     return new UserHDRepository();
