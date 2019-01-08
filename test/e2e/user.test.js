@@ -10,7 +10,7 @@ describe('List User', () => {
         ]);
     });
 
-    test('should ', async () => {
+    test.skip('should ', async () => {
         console.log('---');
         array = [];
         for(i=0;i<9999;i++){
