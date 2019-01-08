@@ -6,7 +6,7 @@ describe("logger winston", () => {
 
         let log = LoggerWinston.getInstance();
 
-        expect(undefined).toEqual(log.info("jose"));
+        expect(undefined).toEqual(log.info("test logger"));
 
         expect(log).toEqual(LoggerWinston.getInstance());
 
