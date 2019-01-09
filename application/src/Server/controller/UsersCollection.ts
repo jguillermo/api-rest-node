@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import {USER} from "@app/module";
+import {logger, USER} from "@app/module";
 
 export async function userGetCollectionAction(request: Request, response: Response) {
 
@@ -16,7 +16,7 @@ export async function systemcleanAction(request: Request, response: Response) {
     if (global.gc) {
         global.gc();
     } else {
-        console.log("Garbage collection unavailable.  Pass --expose-gc "
+        logger().info("Garbage collection unavailable.  Pass --expose-gc "
           + "when launching node to enable forced garbage collection.");
     }
 

@@ -1,12 +1,12 @@
 import { UserServiceApp } from "@app/Users/Application/Service/UserServiceApp";
 import { UserHDRepository } from "@app/Users/Infrastructure/Repository/HardData/UserRepository";
-import { LoggerWinston } from "@sdk/Logger";
+import { ILogguer, LoggerWinston } from "@sdk/Logger";
 
 function userRepository() {
     return new UserHDRepository(logger());
 }
 
-function logger() {
+export function logger(): ILogguer {
     return LoggerWinston.getInstance();
 }
 
