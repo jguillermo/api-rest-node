@@ -3,7 +3,7 @@ import { UserHDRepository } from "@app/Users/Infrastructure/Repository/HardData/
 import { LoggerWinston } from "@sdk/Logger";
 
 function userRepository() {
-    return new UserHDRepository();
+    return new UserHDRepository(logger());
 }
 
 function logger() {
