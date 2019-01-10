@@ -5,6 +5,7 @@
     ],
     "jsRules": {},
     "rules": {
-        "prefer-const": false
+        "prefer-const": false,
+        "max-classes-per-file": false
     }
 }

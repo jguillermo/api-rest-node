@@ -1,4 +1,5 @@
 import * as elasticsearch from "elasticsearch";
+import { Client } from "elasticsearch";
 import * as winston from "winston";
 
 export interface ILogguer {
@@ -8,35 +9,30 @@ export interface ILogguer {
     repositoryCreated(repositoryName: string): void;
 }
 
-async function add_log(body: any) {
-    let client = new elasticsearch.Client({
-        host: "elasticsearch:9200",
-        log: "trace",
-    });
-
-    let datenow = new Date();
-
-    body.date_utc = datenow.toISOString();
-
-    /*await client.indices.create({
-        index: 'applogger'
-      },function(err,resp,status) {
-        if(err) {
-            console.log('---error----');
-            console.log(err);
-        }
-        else {
-          console.log("create",resp);
-        }
-      });
+class LogElastickSearch {
+    private client: Client;
+    constructor() {
+        this.client = new elasticsearch.Client({
+            host: "elasticsearch:9200",
+            log: "trace",
+        });
+    }
+    public index(body: any) {
+        let datenow = new Date();
+        body.date_utc = datenow.toISOString();
+        this.client.index({
+            body,
+            index: "applogger",
+            type: "_doc",
+          });
+    }
+    /*
+    private async createIndex() {
+        await this.client.indices.create({
+            index: "applogger",
+          });
+    }
     */
-
-    client.index({
-        body,
-        index: "applogger",
-        type: "_doc",
-
-      });
 }
 
 export class LoggerWinston implements ILogguer {
@@ -48,6 +44,7 @@ export class LoggerWinston implements ILogguer {
     }
     private static instance: LoggerWinston;
     public logger: winston.Logger;
+    private transport: LogElastickSearch;
     private constructor() {
         this.logger = winston.createLogger({
             format: winston.format.combine(
@@ -61,15 +58,11 @@ export class LoggerWinston implements ILogguer {
                 new winston.transports.Console(),
             ],
         });
+
+        this.transport = new LogElastickSearch();
     }
     public serviceMethod(methodName: string, serviceName: string): void {
-        add_log( {
-            event: "method",
-            name: methodName,
-            service: serviceName,
-            type: "service",
-            });
-        this.logger.info("service method", {
+        this.loggerApp("service method", {
             event: "method",
             name: methodName,
             service: serviceName,
@@ -77,16 +70,17 @@ export class LoggerWinston implements ILogguer {
             });
     }
     public serviceCreated(serviceName: string): void {
-        add_log({type: "service", event: "created", name: serviceName});
-        this.logger.info("service created", {type: "service", event: "created", name: serviceName});
+        this.loggerApp("service created", {type: "service", event: "created", name: serviceName});
     }
     public repositoryCreated(repositoryName: string): void {
-        add_log({type: "repository", event: "created", name: repositoryName});
-        this.logger.info("repository created", {type: "repository", event: "created", name: repositoryName});
+        this.loggerApp("repository created", {type: "repository", event: "created", name: repositoryName});
     }
 
-    public info(message: string): void {
-        // add_log()
-       this.logger.info(message);
+    public info(message: string, meta?: any): void {
+       this.logger.info(message, meta);
+    }
+    private loggerApp(message: string, params: object) {
+        this.transport.index(params);
+        this.info(message, params);
     }
 }
