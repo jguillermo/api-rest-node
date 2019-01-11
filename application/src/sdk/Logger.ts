@@ -9,7 +9,17 @@ export interface ILogguer {
     repositoryCreated(repositoryName: string): void;
 }
 
-class LogElastickSearch {
+interface ILoggerTrace {
+    event: string;
+    name: string;
+    type: string;
+    date_utc?: string;
+}
+
+interface ILoggerRepository {
+    index(body: ILoggerTrace): void;
+}
+class LogElastickSearch implements ILoggerRepository {
     private client: Client;
     constructor() {
         this.client = new elasticsearch.Client({
@@ -17,7 +27,7 @@ class LogElastickSearch {
             log: "trace",
         });
     }
-    public index(body: any) {
+    public index(body: ILoggerTrace) {
         let datenow = new Date();
         body.date_utc = datenow.toISOString();
         this.client.index({
@@ -38,14 +48,14 @@ class LogElastickSearch {
 export class LoggerWinston implements ILogguer {
     public static getInstance() {
         if (!LoggerWinston.instance) {
-            LoggerWinston.instance = new LoggerWinston();
+            LoggerWinston.instance = new LoggerWinston(new LogElastickSearch());
         }
         return LoggerWinston.instance;
     }
     private static instance: LoggerWinston;
     public logger: winston.Logger;
-    private transport: LogElastickSearch;
-    private constructor() {
+    private transport: ILoggerRepository;
+    private constructor(loggerRepository: ILoggerRepository) {
         this.logger = winston.createLogger({
             format: winston.format.combine(
                 winston.format.timestamp({
@@ -58,28 +68,26 @@ export class LoggerWinston implements ILogguer {
                 new winston.transports.Console(),
             ],
         });
-
-        this.transport = new LogElastickSearch();
+        this.transport = loggerRepository;
     }
     public serviceMethod(methodName: string, serviceName: string): void {
-        this.loggerApp("service method", {
-            event: "method",
-            name: methodName,
-            service: serviceName,
-            type: "service",
-            });
+        let log: ILoggerTrace = {type: "service", event: "called", name: `${serviceName}-${methodName}`};
+        this.loggerApp("service method", log);
     }
     public serviceCreated(serviceName: string): void {
-        this.loggerApp("service created", {type: "service", event: "created", name: serviceName});
+
+        let log: ILoggerTrace = {type: "service", event: "created", name: serviceName};
+        this.loggerApp("service created", log);
     }
     public repositoryCreated(repositoryName: string): void {
-        this.loggerApp("repository created", {type: "repository", event: "created", name: repositoryName});
+        let log: ILoggerTrace = {type: "repository", event: "created", name: repositoryName};
+        this.loggerApp("repository created", log);
     }
 
     public info(message: string, meta?: any): void {
        this.logger.info(message, meta);
     }
-    private loggerApp(message: string, params: object) {
+    private loggerApp(message: string, params: ILoggerTrace) {
         this.transport.index(params);
         this.info(message, params);
     }
