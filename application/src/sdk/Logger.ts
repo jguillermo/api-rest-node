@@ -19,6 +19,13 @@ interface ILoggerTrace {
 interface ILoggerRepository {
     index(body: ILoggerTrace): void;
 }
+class LogFake implements ILoggerRepository {
+
+    public index(body: ILoggerTrace) {
+        return true;
+    }
+}
+/*
 class LogElastickSearch implements ILoggerRepository {
     private client: Client;
     constructor() {
@@ -36,19 +43,17 @@ class LogElastickSearch implements ILoggerRepository {
             type: "_doc",
           });
     }
-    /*
     private async createIndex() {
         await this.client.indices.create({
             index: "applogger",
           });
     }
-    */
 }
-
+ */
 export class LoggerWinston implements ILogguer {
     public static getInstance() {
         if (!LoggerWinston.instance) {
-            LoggerWinston.instance = new LoggerWinston(new LogElastickSearch());
+            LoggerWinston.instance = new LoggerWinston(new LogFake());
         }
         return LoggerWinston.instance;
     }
